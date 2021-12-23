@@ -1,5 +1,7 @@
 # Web AR with Three.js
 
+This is a basic example of working with VR on the web.
+
 ## Setup
 
 You will need to have [Node.js](https://nodejs.org/en/) installed. 
