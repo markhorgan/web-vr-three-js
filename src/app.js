@@ -107,21 +107,20 @@ class App {
           controller.children[0].scale.z = intersects[0].distance;
           this.selectedObject = intersects[0].object;
           this.selectedObject.material.color = objectSelectedColor;
-          // Save the position of the object and controller so we know how much to move the object when the controller moves
-          this.selectedObjectStartPosition = this.selectedObject.position.clone();
-          this.controllerStartPosition = controller.position.clone();
+          this.selectedObjectDistance = this.selectedObject.position.distanceTo(controller.position);
         }
       } else if (this.selectedObject) {
-        // Get the vector from the controller's "start" position and it's current position
-        const deltaVector = controller.position.clone().sub(this.controllerStartPosition);
-        // Move the selected object by the change in position of the controller
-        this.selectedObject.position.copy(this.selectedObjectStartPosition.clone().add(deltaVector));
+        // Move selected object so it's always the same distance from controller
+        const moveVector = controller.getWorldDirection(new Vector3()).multiplyScalar(this.selectedObjectDistance).negate();
+        this.selectedObject.position.copy(controller.position.clone().add(moveVector));
       }
     } else if (controller.userData.selectPressedPrev) {
       // Select released
       controller.children[0].scale.z = 10;
-      this.selectedObject.material.color = objectUnselectedColor;
-      this.selectedObject = null;
+      if (this.selectedObject != null) {
+        this.selectedObject.material.color = objectUnselectedColor;
+        this.selectedObject = null;
+      }
     }
     controller.userData.selectPressedPrev = controller.userData.selectPressed;
   }
