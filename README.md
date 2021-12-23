@@ -1,4 +1,4 @@
-# Web AR in Three.js
+# Web AR with Three.js
 
 ## Setup
 
