@@ -8,6 +8,7 @@ const objectSelectedColor = new Color(0xf0520a);
 class App {
   constructor() {
     this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    this.camera.position.set(0, 1.6, 3);
     this.scene = new Scene();
     this.scene.background = new Color(0x505050);
   
@@ -18,14 +19,14 @@ class App {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(this.renderer.domElement);
   
-    this.initVR();
+    this.initXR();
     this.initScene();
   
     window.addEventListener('resize', this.onWindowResize.bind(this), false);
     this.renderer.setAnimationLoop(this.render.bind(this));
   }
 
-  initVR() {
+  initXR() {
     this.renderer.xr.enabled = true;
     document.body.appendChild(VRButton.createButton(this.renderer));
     this.controllers = this.buildControllers();
