@@ -6,7 +6,7 @@
   "scripts": {
     "start": "parcel src/index.html"
   },
-  "author": "",
+  "author": "Mark Horgan",
   "license": "ISC",
   "dependencies": {
     "three": "^0.135.0"
